@@ -9,11 +9,11 @@ API_KEY='5978028781:AAHo8vS2cIYKTamNbvCHNvIoYb1UcaZHkQI'
 bot=telebot.TeleBot(API_KEY)
 
 @bot.message_handler(commands=['start'])
-def show(message):
+def start(message):
     bot.reply_to(message,"Hello! Welcome to GCECT")
 
 @bot.message_handler(commands=['helpline'])
-def show(message):
+def helpline(message):
     bot.reply_to(message,"""following commands will perform as stated below:
         /start -> Welcome to our college
         /helpline -> this message will show
@@ -25,7 +25,7 @@ def show(message):
         /wind_speed -> showing wind speed""")
 
 @bot.message_handler(commands=['content'])
-def show(message):
+def content(message):
     bot.reply_to(message,""" We have various details regarding weather available :
                 basic weather details
                 sunrise
@@ -38,8 +38,8 @@ def weather(message):
  c = message.text
 
  W_Url = "https://api.openweathermap.org/data/2.5/weather?"
- API_KEY = '4961dfe8dac0eb120ff56f0dd8af8f0a'
- URL = W_Url + "q=" +c+ "&appid=" + API_KEY
+ OWN_KEY = '4961dfe8dac0eb120ff56f0dd8af8f0a'
+ URL = W_Url + "q=" +c+ "&appid=" + OWN_KEY
 
  City=""
  response = requests.get(URL)
@@ -64,6 +64,7 @@ def weather(message):
     print(City)
     
     bot.send_message(message.chat.id,City)
+    bot.send_message(message.chat.id,"""Enter the next city to get the weather status""")
  else:
     #Invalid City message
     bot.send_message(message.chat.id,"""Enter  a  Valid City""")
